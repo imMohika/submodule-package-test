@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "build": "pnpm run build:pkgs && build:next",
+    "dev": "pnpm run --stream \"/^dev:.*/\"",
+    "build:next": "next build",
+    "dev:next": "next dev --turbopack",
+    "build:pkgs": "pnpm run pkg:starter-lib:build",
+    "dev:pkgs": "pnpm run pkg:starter-lib:dev",
+    "pkg:starter-lib:build": "pnpm link ./starter-lib && cd ./starter-lib && pnpm i && pnpm build",
+    "pkg:starter-lib:dev": "cd ./starter-lib && pnpm dev",
+    "preinstall": "npx -y only-allow pnpm && pnpm run build:pkgs"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -20,5 +26,10 @@
     "@types/react-dom": "^19",
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4"
+  },
+  "pnpm": {
+    "overrides": {
+      "starter-lib": "link:./starter-lib/"
+    }
   }
 }
