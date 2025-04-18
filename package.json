@@ -8,13 +8,12 @@
     "dev": "pnpm run --stream \"/^dev:.*/\"",
     "build:next": "next build",
     "dev:next": "next dev --turbopack",
-    "build:pkgs": "pnpm run pkg:starter-lib:build",
-    "dev:pkgs": "pnpm run pkg:starter-lib:dev",
-    "pkg:starter-lib:build": "pnpm link ./starter-lib && cd ./starter-lib && pnpm i && pnpm build",
-    "pkg:starter-lib:dev": "cd ./starter-lib && pnpm dev",
-    "preinstall": "npx -y only-allow pnpm && pnpm run build:pkgs"
+    "build:pkgs": "pnpm --stream -r run build",
+    "dev:pkgs": "pnpm --stream --parallel -r run dev",
+    "preinstall": "npx -y only-allow pnpm"
   },
   "dependencies": {
+    "starter-lib": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "next": "15.3.1"
@@ -26,10 +25,5 @@
     "@types/react-dom": "^19",
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4"
-  },
-  "pnpm": {
-    "overrides": {
-      "starter-lib": "link:./starter-lib/"
-    }
   }
 }

@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  starter-lib: link:./starter-lib/
-
 importers:
 
   .:
@@ -20,6 +17,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
+      starter-lib:
+        specifier: workspace:*
+        version: link:packages/starter-lib
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -40,7 +40,7 @@ importers:
         specifier: ^5
         version: 5.8.3
 
-  starter-lib:
+  packages/starter-lib:
     dependencies:
       react:
         specifier: ^18.0.0 || ^19.0.0
